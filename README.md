@@ -2,9 +2,9 @@
 
 **Legacy .NET Framework monolith → Azure microservices modernization**
 
-Travel Booking is the architectural blueprint and reference implementation for migrating a monolithic .NET Framework application (~40,000 users, ~600-table database) to a cloud-native, event-driven microservices architecture on Azure using .NET 8.
+Travel Booking is the architectural blueprint and reference implementation for migrating a monolithic .NET Framework application (~40,000 users, ~600-table database) to a cloud-native, event-driven microservices architecture on Azure using .NET 9.
 
-> **Status:** Phase 1 development — May 2026 to January 2027. Service scaffolding and shared libraries are in place; business logic implementation is underway.
+> **Status:** Pre-Phase 1 — Phase 1 runs May 2026 to January 2027. Service scaffolding, shared libraries, and architecture design documents are complete; awaiting Phase 1 kickoff.
 
 ---
 
@@ -145,10 +145,13 @@ TravelBooking/
 ├── Directory.Packages.props               # Central NuGet version management
 ├── TravelBooking.slnx                         # Solution file
 │
-├── Technical_Assessment_Solution_Final_Version4.md   # Latest architecture design
+├── Technical_Assessment_Solution_Final_Version5.md   # Latest architecture design
+├── Technical_Assessment_Solution_Final_Version4.md   # Previous architecture revision
+├── [Nhan.Nguyen]Technical_Assessment_Solution.md     # Candidate's primary deliverable
 ├── TechSpec.md                            # Detailed technical specifications
 ├── PRD-Frontend-React18-SPA.md            # Frontend PRD (51 user stories)
 ├── Diagrams.md                            # Mermaid diagram sources
+├── plan-travelBookings.prompt.md          # AI-assisted planning prompt
 └── CLAUDE.md                              # AI agent configuration
 ```
 
@@ -195,10 +198,14 @@ cd src/Frontend
 
 npm install          # Install dependencies
 npm run dev          # Dev server at http://localhost:5173
-npm run build        # Production build → dist/
-npm run test         # Vitest (watch mode)
+npm run build        # TypeScript check + production build → dist/
+npm run test         # Vitest (single run)
+npm run test:watch   # Vitest in watch mode
+npm run test:coverage # Vitest with coverage
 npm run test:e2e     # Playwright E2E tests
+npm run typecheck    # TypeScript type checking (tsc --noEmit)
 npm run lint         # ESLint + Prettier check
+npm run lint:fix     # ESLint + Prettier auto-fix
 ```
 
 ---
@@ -245,7 +252,9 @@ npm run lint         # ESLint + Prettier check
 
 | Document | Description |
 |---|---|
-| [Technical Assessment Solution (Latest)](Technical_Assessment_Solution_Final_Version4.md) | Complete architecture design with diagrams and ADRs |
+| [Technical Assessment Solution (Latest)](Technical_Assessment_Solution_Final_Version5.md) | Complete architecture design with diagrams and ADRs (v5) |
+| [Technical Assessment Solution (v4)](Technical_Assessment_Solution_Final_Version4.md) | Previous architecture revision |
+| [Candidate Deliverable](%5BNhan.Nguyen%5DTechnical_Assessment_Solution.md) | Primary technical assessment submission (2026-03-21) |
 | [Technical Specification](TechSpec.md) | Event payloads, error handling, retry strategies, API contracts |
 | [Frontend PRD](PRD-Frontend-React18-SPA.md) | 51 user stories, acceptance criteria, UX specifications |
 | [Architecture Diagrams](Diagrams.md) | Mermaid source for all architecture diagrams |
