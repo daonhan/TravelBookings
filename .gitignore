@@ -1,0 +1,70 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# Build results
+[Dd]ebugPublic/
+[Rr]eleases/
+build/
+TestResults/
+coverage/
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# User-specific
+*.rsuser
+*.pidb
+*.svclog
+*.dbmdl
+*.jfm
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Node / React
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Azure
+publish/
+PublishScripts/
+
+# Secrets
+appsettings.Development.json
+!**/appsettings.Development.template.json

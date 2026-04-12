@@ -1,0 +1,34 @@
+{
+  "page": {
+    "title": "Payments",
+    "details": "Payment Details",
+    "transactions": "Transactions",
+    "refund": "Refund Payment"
+  },
+  "status": {
+    "Pending": "Pending",
+    "Processing": "Processing",
+    "Completed": "Completed",
+    "Failed": "Failed",
+    "Refunded": "Refunded",
+    "PartiallyRefunded": "Partially Refunded"
+  },
+  "method": {
+    "CreditCard": "Credit Card",
+    "DebitCard": "Debit Card",
+    "BankTransfer": "Bank Transfer",
+    "PayPal": "PayPal"
+  },
+  "transaction": {
+    "type": "Transaction Type",
+    "Charge": "Charge",
+    "Refund": "Refund"
+  },
+  "refundForm": {
+    "amount": "Refund Amount",
+    "submit": "Process Refund",
+    "confirm": "Are you sure you want to process this refund?",
+    "success": "Refund processed successfully.",
+    "error": "Failed to process refund."
+  }
+}

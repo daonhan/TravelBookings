@@ -1,0 +1,18 @@
+{
+  "center": "Notification Center",
+  "preferences": "Preferences",
+  "channel": {
+    "Email": "Email",
+    "Sms": "SMS",
+    "Push": "Push Notification"
+  },
+  "type": {
+    "BookingConfirmation": "Booking Confirmation",
+    "BookingCancellation": "Booking Cancellation",
+    "PaymentReceipt": "Payment Receipt",
+    "PaymentFailed": "Payment Failed",
+    "EventCreated": "Event Created",
+    "EventUpdated": "Event Updated",
+    "AttendeeRegistered": "Attendee Registered"
+  }
+}

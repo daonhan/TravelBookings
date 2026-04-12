@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(dotnet:*)",
+      "Bash(ls:*)",
+      "Bash(python3 -c \":*)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")",
+      "Bash(grep -E \"\\\\.\\(ts|tsx|js\\)$\")",
+      "Bash(find D:/Researches/TravelBookings -type d -name \"bin\" -path \"*/src/*\" -exec rm -rf {} +)",
+      "Bash(find D:/Researches/TravelBookings -type d -name \"obj\" -path \"*/src/*\" -exec rm -rf {} +)",
+      "Bash(mv PhoenixDX.slnx TravelBookings.slnx)",
+      "Bash(mv \"plan-phoenixDx.prompt.md\" \"plan-travelBookings.prompt.md\")",
+      "Bash(mv PhoenixDX.Common.Events/PhoenixDX.Common.Events.csproj PhoenixDX.Common.Events/TravelBookings.Common.Events.csproj)",
+      "Bash(mv PhoenixDX.Common.HealthChecks/PhoenixDX.Common.HealthChecks.csproj PhoenixDX.Common.HealthChecks/TravelBookings.Common.HealthChecks.csproj)",
+      "Bash(mv PhoenixDX.Common.Logging/PhoenixDX.Common.Logging.csproj PhoenixDX.Common.Logging/TravelBookings.Common.Logging.csproj)",
+      "Bash(mv PhoenixDX.Common.Security/PhoenixDX.Common.Security.csproj PhoenixDX.Common.Security/TravelBookings.Common.Security.csproj)",
+      "Bash(mv PhoenixDX.Common.Events TravelBookings.Common.Events)",
+      "Bash(mv PhoenixDX.Common.HealthChecks TravelBookings.Common.HealthChecks)",
+      "Bash(mv PhoenixDX.Common.Logging TravelBookings.Common.Logging)",
+      "Bash(mv PhoenixDX.Common.Security TravelBookings.Common.Security)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

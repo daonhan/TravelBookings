@@ -1,0 +1,46 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "bookings": "Bookings",
+    "events": "Events",
+    "payments": "Payments",
+    "reports": "Reports",
+    "notifications": "Notifications",
+    "settings": "Settings"
+  },
+  "button": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "search": "Search",
+    "create": "Create",
+    "edit": "Edit",
+    "back": "Back",
+    "close": "Close",
+    "retry": "Retry",
+    "exportCsv": "Export CSV",
+    "markAllRead": "Mark All Read",
+    "loading": "Loading",
+    "submit": "Submit"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "failed": "Failed"
+  },
+  "error": {
+    "generic": "An unexpected error occurred. Please try again later.",
+    "notFound": "The requested resource was not found.",
+    "accessDenied": "You do not have permission to access this resource.",
+    "serviceUnavailable": "The service is temporarily unavailable. Please try again later."
+  },
+  "pagination": {
+    "showing": "Showing {{from}}-{{to}} of {{total}}",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{page}} of {{totalPages}}"
+  }
+}

@@ -1,0 +1,45 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Common/">
+    <Project Path="src/Common/TravelBookings.Common.Events/TravelBookings.Common.Events.csproj" />
+    <Project Path="src/Common/TravelBookings.Common.HealthChecks/TravelBookings.Common.HealthChecks.csproj" />
+    <Project Path="src/Common/TravelBookings.Common.Logging/TravelBookings.Common.Logging.csproj" />
+    <Project Path="src/Common/TravelBookings.Common.Security/TravelBookings.Common.Security.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/EventManagement/">
+    <Project Path="src/Services/EventManagement/EventManagement.API/EventManagement.API.csproj" />
+    <Project Path="src/Services/EventManagement/EventManagement.Application/EventManagement.Application.csproj" />
+    <Project Path="src/Services/EventManagement/EventManagement.Domain/EventManagement.Domain.csproj" />
+    <Project Path="src/Services/EventManagement/EventManagement.Infrastructure/EventManagement.Infrastructure.csproj" />
+    <Project Path="src/Services/EventManagement/EventManagement.Tests/EventManagement.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Notification/">
+    <Project Path="src/Services/Notification/Notification.API/Notification.API.csproj" />
+    <Project Path="src/Services/Notification/Notification.Application/Notification.Application.csproj" />
+    <Project Path="src/Services/Notification/Notification.Domain/Notification.Domain.csproj" />
+    <Project Path="src/Services/Notification/Notification.Infrastructure/Notification.Infrastructure.csproj" />
+    <Project Path="src/Services/Notification/Notification.Tests/Notification.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Payment/">
+    <Project Path="src/Services/Payment/Payment.API/Payment.API.csproj" />
+    <Project Path="src/Services/Payment/Payment.Application/Payment.Application.csproj" />
+    <Project Path="src/Services/Payment/Payment.Domain/Payment.Domain.csproj" />
+    <Project Path="src/Services/Payment/Payment.Infrastructure/Payment.Infrastructure.csproj" />
+    <Project Path="src/Services/Payment/Payment.Tests/Payment.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/Reporting/">
+    <Project Path="src/Services/Reporting/Reporting.API/Reporting.API.csproj" />
+    <Project Path="src/Services/Reporting/Reporting.Application/Reporting.Application.csproj" />
+    <Project Path="src/Services/Reporting/Reporting.Domain/Reporting.Domain.csproj" />
+    <Project Path="src/Services/Reporting/Reporting.Infrastructure/Reporting.Infrastructure.csproj" />
+    <Project Path="src/Services/Reporting/Reporting.Tests/Reporting.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/TravelBooking/">
+    <Project Path="src/Services/TravelBooking/TravelBooking.API/TravelBooking.API.csproj" />
+    <Project Path="src/Services/TravelBooking/TravelBooking.Application/TravelBooking.Application.csproj" />
+    <Project Path="src/Services/TravelBooking/TravelBooking.Domain/TravelBooking.Domain.csproj" />
+    <Project Path="src/Services/TravelBooking/TravelBooking.Infrastructure/TravelBooking.Infrastructure.csproj" />
+    <Project Path="src/Services/TravelBooking/TravelBooking.Tests/TravelBooking.Tests.csproj" />
+  </Folder>
+</Solution>

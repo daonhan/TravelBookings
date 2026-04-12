@@ -1,0 +1,55 @@
+{
+  "page": {
+    "title": "Events",
+    "create": "Create Event",
+    "details": "Event Details",
+    "search": "Search Events",
+    "registrations": "Registrations",
+    "sessions": "Sessions"
+  },
+  "form": {
+    "title": "Title",
+    "description": "Description",
+    "venue": "Venue",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "country": "Country",
+    "postalCode": "Postal Code",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "capacity": "Capacity",
+    "categories": "Categories",
+    "speaker": "Speaker",
+    "sessionTitle": "Session Title",
+    "sessionDescription": "Session Description",
+    "sessionStartTime": "Start Time",
+    "sessionEndTime": "End Time",
+    "sessionCapacity": "Session Capacity",
+    "addSession": "Add Session",
+    "removeSession": "Remove Session"
+  },
+  "status": {
+    "Draft": "Draft",
+    "Published": "Published",
+    "InProgress": "In Progress",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled"
+  },
+  "registration": {
+    "register": "Register",
+    "attendeeName": "Attendee Name",
+    "registrationType": "Registration Type",
+    "sessionPreferences": "Session Preferences",
+    "Standard": "Standard",
+    "VIP": "VIP",
+    "Speaker": "Speaker",
+    "Organizer": "Organizer"
+  },
+  "registrationStatus": {
+    "Pending": "Pending",
+    "Confirmed": "Confirmed",
+    "Cancelled": "Cancelled",
+    "WaitListed": "Wait Listed"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "page": {
+    "title": "Bookings",
+    "create": "Create Booking",
+    "details": "Booking Details",
+    "search": "Search Bookings"
+  },
+  "form": {
+    "origin": "Origin",
+    "destination": "Destination",
+    "travelClass": "Travel Class",
+    "departureDate": "Departure Date",
+    "returnDate": "Return Date",
+    "passenger": "Passenger",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "passportNumber": "Passport Number",
+    "dateOfBirth": "Date of Birth",
+    "totalAmount": "Total Amount",
+    "currency": "Currency",
+    "addItinerary": "Add Itinerary",
+    "addPassenger": "Add Passenger",
+    "removeItinerary": "Remove Itinerary",
+    "removePassenger": "Remove Passenger"
+  },
+  "status": {
+    "Draft": "Draft",
+    "Requested": "Requested",
+    "InventoryReserved": "Inventory Reserved",
+    "PaymentProcessing": "Payment Processing",
+    "Confirmed": "Confirmed",
+    "Cancelled": "Cancelled",
+    "Failed": "Failed",
+    "Compensating": "Compensating"
+  },
+  "saga": {
+    "inventoryCheck": "Inventory Check",
+    "inventoryReserve": "Inventory Reserve",
+    "paymentProcess": "Payment Processing",
+    "confirmation": "Confirmation",
+    "compensation": "Compensation"
+  },
+  "travelClass": {
+    "economy": "Economy",
+    "business": "Business",
+    "first": "First Class"
+  }
+}

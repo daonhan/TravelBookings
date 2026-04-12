@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>[Nhan.Nguyen]Technical_Assessment_Solution.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="technical-assessment-%E2%80%93-technical-lead-azure-microservices">Technical Assessment – Technical Lead (Azure Microservices)</h1>
+<p><strong>Candidate</strong>: Dao Nhan Nguyen (daonhan@gmail.com)
+<strong>Date</strong>: 2026-03-21<br>
+<strong>Position</strong>: .NET Technical Lead – Azure Microservices<br>
+<strong>Company</strong>: TravelBookings</p>
+<hr>
+<h2 id="1-target-architecture-overview">1. Target Architecture Overview</h2>
+<h3 id="11-high-level-architecture-diagram">1.1 High-Level Architecture Diagram</h3>
+<pre><code class="language-mermaid"><div class="mermaid">graph TB
+    subgraph Clients
+        ReactSPA["React 18 SPA<br/>(Shared Design System)"]
+        MobileApps["Mobile Apps"]
+        ThirdParty["3rd Party"]
+    end
+
+    subgraph Gateway["Azure Front Door (CDN + WAF)"]
+        FrontDoor["Global Load Balancing<br/>CDN + WAF"]
+    end
+
+    subgraph APIM["Azure API Management (Gateway)"]
+        APIMCore["Rate Limiting | Auth (JWT/OAuth2)<br/>Routing | Versioning"]
+    end
+
+    subgraph Services["Microservices (.NET 8 on Azure App Service)"]
+        TravelSvc["Travel Booking<br/>Service<br/>(.NET 8)"]
+        EventSvc["Event Management<br/>Service<br/>(.NET 8)"]
+        PaymentSvc["Payment Service<br/>(.NET 8)<br/>[LEGACY WRAPPER<br/>Phase 1]"]
+        ReportingSvc["Reporting<br/>Service<br/>(.NET 8)"]
+        NotificationSvc["Notification<br/>Service<br/>(.NET 8)"]
+    end
+
+    subgraph Databases["Per-Service Azure SQL Databases"]
+        TravelDB[("Azure SQL DB<br/>(Travel)")]
+        EventDB[("Azure SQL DB<br/>(Event)")]
+        PaymentDB[("Azure SQL DB<br/>(Payment)")]
+        ReportingDB[("Azure SQL DB<br/>(Read Replicas)")]
+        NotificationDB[("Azure SQL DB<br/>(Notification)")]
+    end
+
+    subgraph ServiceBus["Azure Service Bus (Topics & Queues)"]
+        BookingTopics["BookingConfirmed<br/>BookingCancelled<br/>AllocationDone"]
+        EventTopics["EventCreated<br/>EventUpdated<br/>AttendeeRegistered"]
+        PaymentTopics["PaymentProcessed<br/>PaymentFailed"]
+    end
+
+    subgraph Observability["Observability Layer"]
+        Monitor["Azure Monitor"]
+        AppInsights["Application Insights"]
+        LogAnalytics["Log Analytics"]
+        DistTracing["Distributed Tracing"]
+    end
+
+    subgraph Infra["Infrastructure (IaC – Bicep/Terraform)"]
+        Pipelines["Azure DevOps Pipelines"]
+        KeyVault["Azure Key Vault"]
+        ACR["Azure Container Registry"]
+    end
+
+    ReactSPA & MobileApps & ThirdParty -->|HTTPS| FrontDoor
+    FrontDoor --> APIMCore
+    APIMCore --> TravelSvc
+    APIMCore --> EventSvc
+    APIMCore --> PaymentSvc
+    APIMCore --> ReportingSvc
+    APIMCore --> NotificationSvc
+    TravelSvc --> TravelDB
+    EventSvc --> EventDB
+    PaymentSvc --> PaymentDB
+    ReportingSvc --> ReportingDB
+    NotificationSvc --> NotificationDB
+    TravelSvc <--> BookingTopics
+    EventSvc <--> EventTopics
+    PaymentSvc <--> PaymentTopics
+    ReportingSvc -.->|subscribes| BookingTopics & EventTopics & PaymentTopics
+    NotificationSvc -.->|subscribes| BookingTopics & EventTopics & PaymentTopics
+    Services --> Observability
+    Databases --> Observability
+    ServiceBus --> Observability
+    Observability --> Infra
+</div></code></pre>
+<h3 id="12-proposed-service-boundaries-bounded-contexts">1.2 Proposed Service Boundaries (Bounded Contexts)</h3>
+<table>
+<thead>
+<tr>
+<th>Bounded Context</th>
+<th>Service</th>
+<th>Responsibility</th>
+<th>Data Ownership</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Travel</strong></td>
+<td>Travel Booking Service</td>
+<td>Search, booking, itinerary, allocation algorithms, supplier integration</td>
+<td><code>Travel_DB</code> – bookings, itineraries, allocations, suppliers</td>
+</tr>
+<tr>
+<td><strong>Events</strong></td>
+<td>Event Management Service</td>
+<td>Event creation, scheduling, attendee registration, workforce assignment</td>
+<td><code>Event_DB</code> – events, schedules, attendees, workforce</td>
+</tr>
+<tr>
+<td><strong>Payments</strong></td>
+<td>Payment Service</td>
+<td>Payment processing, refunds, reconciliation, digital wallets</td>
+<td><code>Payment_DB</code> – transactions, ledger, payment methods <em>(legacy wrapper in Phase 1)</em></td>
+</tr>
+<tr>
+<td><strong>Reporting</strong></td>
+<td>Reporting Service</td>
+<td>Dashboards, analytics, data aggregation, exports</td>
+<td><code>Reporting_DB</code> – materialized views, read replicas, denormalized data</td>
+</tr>
+<tr>
+<td><strong>Communications</strong></td>
+<td>Notification Service</td>
+<td>Email, SMS, push notifications, centralized comms templates</td>
+<td><code>Notification_DB</code> – templates, delivery logs, preferences</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-communication-model-sync-vs-async">1.3 Communication Model (Sync vs Async)</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    Start["Inter-Service<br/>Communication Needed"] --> Q1{"User waiting<br/>for immediate<br/>response?"}
+    Q1 -->|Yes| Sync["Synchronous REST<br/>via APIM"]
+    Q1 -->|No| Q3{"State change<br/>notification?"}
+    Q3 -->|Yes| Q4{"Multiple<br/>subscribers?"}
+    Q3 -->|No| Queue["Azure Service Bus<br/>Queue — 1:1 Command"]
+    Q4 -->|Yes| Topic["Azure Service Bus<br/>Topic/Subscription — Pub/Sub"]
+    Q4 -->|No| Queue
+    Sync --> CB["+ Polly Circuit Breaker<br/>+ Timeout Policy<br/>+ Bulkhead Isolation"]
+    Topic --> Idem["+ Idempotent Consumers<br/>+ DLQ Monitoring<br/>+ CorrelationId Propagation"]
+    Queue --> Idem
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>When Used</th>
+<th>Technology</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Synchronous</strong></td>
+<td>User-facing queries needing immediate response</td>
+<td>REST / HTTPS via APIM</td>
+<td>Get booking details, search events, fetch reports</td>
+</tr>
+<tr>
+<td><strong>Async Pub/Sub</strong></td>
+<td>Cross-service state changes; eventual consistency</td>
+<td>Azure Service Bus Topics</td>
+<td>BookingConfirmed → notification + reporting</td>
+</tr>
+<tr>
+<td><strong>Async Command</strong></td>
+<td>Reliable 1:1 task processing</td>
+<td>Azure Service Bus Queues</td>
+<td>Process allocation, generate report</td>
+</tr>
+</tbody>
+</table>
+<h3 id="14-how-azure-components-are-used">1.4 How Azure Components Are Used</h3>
+<table>
+<thead>
+<tr>
+<th>Azure Component</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Azure App Service</strong></td>
+<td>Hosts each .NET 8 microservice; deployment slots for blue/green releases</td>
+</tr>
+<tr>
+<td><strong>Azure SQL Database</strong></td>
+<td>Per-service database; elastic pools for cost optimization during transition</td>
+</tr>
+<tr>
+<td><strong>Azure Service Bus</strong></td>
+<td>Event-driven messaging backbone – Topics for pub/sub, Queues for commands</td>
+</tr>
+<tr>
+<td><strong>Azure API Management</strong></td>
+<td>API Gateway – routing, auth, rate limiting, versioning, legacy façade</td>
+</tr>
+<tr>
+<td><strong>Azure Front Door</strong></td>
+<td>Global load balancing, CDN for React SPA, WAF protection</td>
+</tr>
+<tr>
+<td><strong>Application Insights</strong></td>
+<td>Distributed tracing, metrics, live monitoring per service</td>
+</tr>
+<tr>
+<td><strong>Azure Key Vault</strong></td>
+<td>Secrets management, connection strings, certificates</td>
+</tr>
+<tr>
+<td><strong>Azure DevOps</strong></td>
+<td>CI/CD pipelines, IaC deployment (Bicep)</td>
+</tr>
+<tr>
+<td><strong>Azure Monitor + Log Analytics</strong></td>
+<td>Centralized logging, alerting, dashboards</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-rationale">2. Rationale</h2>
+<h3 id="21-why-these-service-boundaries">2.1 Why These Service Boundaries?</h3>
+<ol>
+<li>
+<p><strong>Natural domain separation.</strong> Travel, Events, Payments, Reporting, and Communications are distinct business capabilities with different domain experts, change cadences, and regulatory requirements. Payment processing has PCI-DSS compliance needs that benefit from isolation. Reporting has fundamentally different read patterns (heavy aggregation, no writes) versus transactional services.</p>
+</li>
+<li>
+<p><strong>Team-aligned ownership.</strong> With 5 backend engineers, we need boundaries that allow 1–2 engineers to own a service end-to-end. Five services map well to five engineers, each becoming the domain expert for their context while pairing across boundaries during integration work.</p>
+</li>
+<li>
+<p><strong>Independent deployability.</strong> Each bounded context can be developed, tested, and deployed independently. The Payment service being wrapped in Phase 1 (constraint: cannot change) does not block Travel or Event modernization.</p>
+</li>
+<li>
+<p><strong>Data sovereignty.</strong> Each service owns its data, preventing the monolithic database from becoming a distributed bottleneck. The ~600 tables naturally cluster around these domains when analyzed by foreign key relationships and access patterns.</p>
+</li>
+</ol>
+<h3 id="22-why-this-communication-model">2.2 Why This Communication Model?</h3>
+<ol>
+<li>
+<p><strong>Sync for reads, Async for writes across boundaries.</strong> User-facing queries demand low latency → synchronous REST. Cross-service state propagation is inherently asynchronous and benefits from temporal decoupling.</p>
+</li>
+<li>
+<p><strong>Resilience.</strong> If the Notification Service is temporarily down, a <code>BookingConfirmed</code> event remains in the Service Bus topic. The booking flow is not blocked. This is critical for the zero-downtime constraint.</p>
+</li>
+<li>
+<p><strong>Azure Service Bus fit.</strong> Topics/Subscriptions provide pub/sub fan-out. Built-in dead-letter queues, retry policies, and sessions align with enterprise reliability. Unlike Event Hubs (optimized for high-throughput streaming), Service Bus provides transactional messaging semantics matching our domain event patterns.</p>
+</li>
+<li>
+<p><strong>Avoiding a distributed monolith.</strong> By defaulting to async communication between services, we prevent temporal coupling. Services do not need to know about each other's availability at runtime.</p>
+</li>
+</ol>
+<hr>
+<h2 id="3-migration-strategy-sequenced-plan">3. Migration Strategy (Sequenced Plan)</h2>
+<h3 id="31-phased-migration-plan">3.1 Phased Migration Plan</h3>
+<pre><code class="language-mermaid"><div class="mermaid">gantt
+    title Phase 1 Modernization – 9-Month Timeline
+    dateFormat YYYY-MM
+    axisFormat %b
+
+    section Phase 0 – Foundation
+    IaC, CI/CD, APIM Façade, Observability     :p0, 2025-07, 2M
+    DB Analysis, Shared Libs, Test Harness      :p0b, 2025-07, 2M
+
+    section Phase 1 – Reporting
+    Create Reporting_DB (Read Replicas / CDC)   :p1a, 2025-08, 1M
+    Build Reporting Service (.NET 8)            :p1b, 2025-09, 2M
+    APIM Route Migration and Cutover            :p1c, 2025-10, 1M
+
+    section Phase 2 – Notifications + Events
+    Notification Service + Service Bus Setup    :p2a, 2025-09, 2M
+    Event Management Service Extraction         :p2b, 2025-10, 3M
+    DB Decomposition (Event Tables)             :p2c, 2025-11, 2M
+
+    section Phase 3 – Travel Booking
+    Travel Booking Service                      :p3a, 2025-11, 4M
+    Payment ACL Integration                     :p3b, 2025-12, 2M
+    DB Decomposition (Travel Tables)            :p3c, 2026-01, 2M
+
+    section Phase 4 – Payment Wrapper + Stabilize
+    Payment Service Wrapper                     :p4a, 2026-01, 2M
+    E2E Integration and Performance Testing     :p4b, 2026-02, 2M
+    Documentation and Runbooks                  :p4c, 2026-03, 1M
+</div></code></pre>
+<p><strong>Phase 0 — Foundation (Months 1–2):</strong> Establish infrastructure (IaC via Bicep), CI/CD pipelines, the APIM Strangler façade (all traffic routed through APIM → monolith), Application Insights on the monolith, shared NuGet libraries (logging, event contracts, health checks), and the automated test harness. Map ~600 tables to bounded contexts.</p>
+<p><strong>Phase 1 — Reporting Service Extraction (Months 2–4):</strong> Extract the lowest-risk, read-heavy service first. Create <code>Reporting_DB</code> with read replicas / CDC from legacy SQL Server. Build the .NET 8 Reporting Service. Progressively switch <code>/api/reports/*</code> routes in APIM from monolith → new service via feature flags. Shadow traffic comparison before full cutover.</p>
+<p><strong>Phase 2 — Notification Service + Event Management (Months 3–6):</strong> Introduce event-driven architecture. Build the Notification Service subscribing to Service Bus topics. Extract Event Management (CRUD, scheduling, attendee registration) into its own service with <code>Event_DB</code>. Dual-write: monolith publishes events to Service Bus while still writing to legacy DB; new services subscribe with idempotent consumers.</p>
+<p><strong>Phase 3 — Travel Booking Service (Months 5–8):</strong> Migrate the core domain. Build search, booking workflows, itinerary management, allocation algorithms. Integrate with Payment via an Anti-Corruption Layer (thin .NET 8 API wrapping legacy payment module). Extract travel tables (~200) via CDC.</p>
+<p><strong>Phase 4 — Payment Wrapper + Stabilization (Months 7–9):</strong> Wrap (not rewrite) Payment for service isolation — no business logic changes (constraint). End-to-end integration testing. Load testing at ~40,000 user scale. Documentation, runbooks, legacy decommission plan.</p>
+<h3 id="32-strangler-fig-pattern">3.2 Strangler Fig Pattern</h3>
+<pre><code class="language-mermaid"><div class="mermaid">graph LR
+    subgraph "BEFORE"
+        C1["Client"] --> M1["Monolith"]
+    end
+
+    subgraph "AFTER (Progressive)"
+        C2["Client"] --> APIM["APIM Gateway"]
+        APIM -->|"/api/reports/*"| RS["Reporting Service"]
+        APIM -->|"/api/events/*"| ES["Event Mgmt Service"]
+        APIM -->|"/api/bookings/*"| TS["Travel Service"]
+        APIM -->|"/api/payments/*"| PW["Payment Wrapper"]
+        APIM -->|"/api/legacy/*"| MR["Monolith (remaining)"]
+    end
+</div></code></pre>
+<p>From Day 1, all client traffic goes through APIM; initially 100% is proxied to the monolith. As each service is ready, APIM routing rules redirect specific URL paths to the new service. Feature flags (Azure App Configuration) control rollout percentage (5% → 25% → 100%). The monolith never grows — only shrinks.</p>
+<h3 id="33-backward-compatibility">3.3 Backward Compatibility</h3>
+<ul>
+<li><strong>API versioning via APIM:</strong> <code>Accept-Version</code> header or URL path versioning (<code>/v1/</code>, <code>/v2/</code>). Old clients continue hitting v1 routes.</li>
+<li><strong>Database views as contracts:</strong> When tables move to a new service DB, leave views in the legacy DB pointing to the same data (via CDC sync) during the transition window.</li>
+<li><strong>Anti-Corruption Layer:</strong> New services do not directly consume legacy schemas. An ACL translates between legacy data models and new domain models.</li>
+<li><strong>Event schema evolution:</strong> CloudEvents envelope with schema version. Consumers handle multiple versions.</li>
+</ul>
+<h3 id="34-zero-downtime-strategy">3.4 Zero-Downtime Strategy</h3>
+<ul>
+<li><strong>Blue/green deployments:</strong> Azure App Service deployment slots. Swap staging → production with zero downtime.</li>
+<li><strong>Feature flags:</strong> Azure App Configuration. Toggle routes on/off without redeployment.</li>
+<li><strong>Online schema migrations:</strong> Expand-and-contract pattern — add new column → backfill → migrate reads → drop old column. Azure SQL online index rebuild.</li>
+<li><strong>Service Bus buffering:</strong> During service restarts, messages queue in Service Bus. No event loss.</li>
+<li><strong>Health checks + circuit breakers:</strong> APIM health probes route away from unhealthy instances.</li>
+</ul>
+<h3 id="35-shared-database-during-transition">3.5 Shared Database During Transition</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    subgraph "Phase 0–1"
+        L1[("Legacy SQL Server<br/>~600 tables")] -->|"CDC / Read Replica"| R1[("Reporting_DB<br/>(read-only)")]
+        L1 ---|"All services<br/>read/write"| M1["Monolith +<br/>Reporting Svc"]
+    end
+
+    subgraph "Phase 2"
+        L2[("Legacy SQL Server<br/>~480 tables")] -->|CDC| E2[("Event_DB<br/>~120 tables")]
+        L2 -->|CDC| R2[("Reporting_DB")]
+        L2 ---|"Single writer<br/>per table"| M2["Monolith (shrinking)"]
+    end
+
+    subgraph "Phase 3–4"
+        L3[("Legacy SQL Server<br/>~280 tables (orphaned)")]
+        T3[("Travel_DB<br/>~200 tables")]
+        E3[("Event_DB")]
+        P3[("Payment_DB")]
+        R3[("Reporting_DB")]
+        N3[("Notification_DB")]
+    end
+</div></code></pre>
+<p><strong>Key rule:</strong> Each table has exactly one writer. Multiple readers are fine (via CDC/views). This prevents split-brain data corruption.</p>
+<hr>
+<h2 id="4-event-driven-design">4. Event-Driven Design</h2>
+<h3 id="41-five-core-domain-events">4.1 Five Core Domain Events</h3>
+<h4 id="1-bookingconfirmed">1. BookingConfirmed</h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"eventType"</span>: <span class="hljs-string">"BookingConfirmed"</span>,
+  <span class="hljs-attr">"eventVersion"</span>: <span class="hljs-string">"1.0"</span>,
+  <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2025-07-15T10:30:00Z"</span>,
+  <span class="hljs-attr">"correlationId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"source"</span>: <span class="hljs-string">"travel-booking-service"</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"bookingId"</span>: <span class="hljs-string">"BK-2025-001234"</span>,
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"USR-98765"</span>,
+    <span class="hljs-attr">"travelType"</span>: <span class="hljs-string">"flight"</span>,
+    <span class="hljs-attr">"departureDate"</span>: <span class="hljs-string">"2025-09-01"</span>,
+    <span class="hljs-attr">"returnDate"</span>: <span class="hljs-string">"2025-09-10"</span>,
+    <span class="hljs-attr">"destination"</span>: <span class="hljs-string">"HCM"</span>,
+    <span class="hljs-attr">"totalAmount"</span>: <span class="hljs-number">1250.00</span>,
+    <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"USD"</span>,
+    <span class="hljs-attr">"passengers"</span>: [
+      { <span class="hljs-attr">"name"</span>: <span class="hljs-string">"John Doe"</span>, <span class="hljs-attr">"passportNumber"</span>: <span class="hljs-string">"XX123456"</span> }
+    ],
+    <span class="hljs-attr">"paymentReference"</span>: <span class="hljs-string">"PAY-2025-005678"</span>
+  }
+}
+</div></code></pre>
+<p><strong>Subscribers:</strong> Notification Service (confirmation email), Reporting Service (dashboards), Event Management Service (if linked to an event).</p>
+<h4 id="2-eventcreated">2. EventCreated</h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"eventType"</span>: <span class="hljs-string">"EventCreated"</span>,
+  <span class="hljs-attr">"eventVersion"</span>: <span class="hljs-string">"1.0"</span>,
+  <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2025-07-15T09:00:00Z"</span>,
+  <span class="hljs-attr">"correlationId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"source"</span>: <span class="hljs-string">"event-management-service"</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"EVT-2025-000456"</span>,
+    <span class="hljs-attr">"organizerId"</span>: <span class="hljs-string">"USR-11111"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Global Engineering Summit 2025"</span>,
+    <span class="hljs-attr">"location"</span>: <span class="hljs-string">"Ho Chi Minh City"</span>,
+    <span class="hljs-attr">"startDate"</span>: <span class="hljs-string">"2025-11-01"</span>,
+    <span class="hljs-attr">"endDate"</span>: <span class="hljs-string">"2025-11-03"</span>,
+    <span class="hljs-attr">"capacity"</span>: <span class="hljs-number">500</span>,
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"draft"</span>,
+    <span class="hljs-attr">"categories"</span>: [<span class="hljs-string">"engineering"</span>, <span class="hljs-string">"conference"</span>]
+  }
+}
+</div></code></pre>
+<p><strong>Subscribers:</strong> Notification Service, Reporting Service, Travel Booking Service (pre-allocate travel options).</p>
+<h4 id="3-paymentprocessed">3. PaymentProcessed</h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"eventType"</span>: <span class="hljs-string">"PaymentProcessed"</span>,
+  <span class="hljs-attr">"eventVersion"</span>: <span class="hljs-string">"1.0"</span>,
+  <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2025-07-15T10:29:55Z"</span>,
+  <span class="hljs-attr">"correlationId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"source"</span>: <span class="hljs-string">"payment-service"</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"paymentId"</span>: <span class="hljs-string">"PAY-2025-005678"</span>,
+    <span class="hljs-attr">"bookingId"</span>: <span class="hljs-string">"BK-2025-001234"</span>,
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"USR-98765"</span>,
+    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">1250.00</span>,
+    <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"USD"</span>,
+    <span class="hljs-attr">"method"</span>: <span class="hljs-string">"credit_card"</span>,
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"completed"</span>,
+    <span class="hljs-attr">"gatewayTransactionId"</span>: <span class="hljs-string">"GW-TXN-XYZ789"</span>,
+    <span class="hljs-attr">"processedAt"</span>: <span class="hljs-string">"2025-07-15T10:29:50Z"</span>
+  }
+}
+</div></code></pre>
+<p><strong>Subscribers:</strong> Travel Booking Service (confirm booking), Notification Service (payment receipt), Reporting Service.</p>
+<h4 id="4-attendeeregistered">4. AttendeeRegistered</h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"eventType"</span>: <span class="hljs-string">"AttendeeRegistered"</span>,
+  <span class="hljs-attr">"eventVersion"</span>: <span class="hljs-string">"1.0"</span>,
+  <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2025-07-15T11:00:00Z"</span>,
+  <span class="hljs-attr">"correlationId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"source"</span>: <span class="hljs-string">"event-management-service"</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"registrationId"</span>: <span class="hljs-string">"REG-2025-007890"</span>,
+    <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"EVT-2025-000456"</span>,
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"USR-22222"</span>,
+    <span class="hljs-attr">"attendeeName"</span>: <span class="hljs-string">"Jane Smith"</span>,
+    <span class="hljs-attr">"registrationType"</span>: <span class="hljs-string">"in-person"</span>,
+    <span class="hljs-attr">"dietaryRequirements"</span>: <span class="hljs-string">"vegetarian"</span>,
+    <span class="hljs-attr">"sessionPreferences"</span>: [<span class="hljs-string">"keynote"</span>, <span class="hljs-string">"workshop-ai"</span>],
+    <span class="hljs-attr">"workforceAssignment"</span>: <span class="hljs-literal">null</span>
+  }
+}
+</div></code></pre>
+<p><strong>Subscribers:</strong> Travel Booking Service (auto-create travel booking), Notification Service (confirmation + logistics), Reporting Service.</p>
+<h4 id="5-bookingcancelled">5. BookingCancelled</h4>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"eventId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"eventType"</span>: <span class="hljs-string">"BookingCancelled"</span>,
+  <span class="hljs-attr">"eventVersion"</span>: <span class="hljs-string">"1.0"</span>,
+  <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"2025-07-15T14:00:00Z"</span>,
+  <span class="hljs-attr">"correlationId"</span>: <span class="hljs-string">"uuid-v4"</span>,
+  <span class="hljs-attr">"source"</span>: <span class="hljs-string">"travel-booking-service"</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"bookingId"</span>: <span class="hljs-string">"BK-2025-001234"</span>,
+    <span class="hljs-attr">"userId"</span>: <span class="hljs-string">"USR-98765"</span>,
+    <span class="hljs-attr">"reason"</span>: <span class="hljs-string">"schedule_change"</span>,
+    <span class="hljs-attr">"cancellationFee"</span>: <span class="hljs-number">50.00</span>,
+    <span class="hljs-attr">"refundAmount"</span>: <span class="hljs-number">1200.00</span>,
+    <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"USD"</span>,
+    <span class="hljs-attr">"originalPaymentId"</span>: <span class="hljs-string">"PAY-2025-005678"</span>
+  }
+}
+</div></code></pre>
+<p><strong>Subscribers:</strong> Payment Service (initiate refund), Notification Service, Event Management Service (free allocation), Reporting Service.</p>
+<h3 id="42-event-flow-example--booking-confirmation">4.2 Event Flow Example — Booking Confirmation</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    User["User submits booking"] --> TravelSvc["Travel Booking Service"]
+    TravelSvc -->|"Sync REST"| PaymentSvc["Payment Service<br/>(Legacy Wrapper)"]
+    PaymentSvc -->|"PaymentProcessed"| SB["Azure Service Bus"]
+    TravelSvc -->|"BookingConfirmed"| SB
+    SB -->|"Subscription 1"| NotifSvc["Notification Service<br/>→ Send confirmation email"]
+    SB -->|"Subscription 2"| ReportSvc["Reporting Service<br/>→ Update dashboards"]
+    SB -->|"Subscription 3"| EventSvc["Event Mgmt Service<br/>→ Update attendee status"]
+    NotifSvc --> NotifDB[("Notification_DB")]
+    ReportSvc --> ReportDB[("Reporting_DB")]
+    EventSvc --> EventDB[("Event_DB")]
+    SB -.->|"Failed after<br/>max retries"| DLQ["Dead-Letter Queue"]
+    DLQ --> AlertFunc["Azure Function → Alert on-call"]
+</div></code></pre>
+<h3 id="43-idempotency-strategy">4.3 Idempotency Strategy</h3>
+<ul>
+<li><strong>Event-level:</strong> Every event carries a globally unique <code>eventId</code> (UUID v4). Consumers store processed IDs in an idempotency table (<code>ProcessedEvents</code>). Before processing: <code>IF EXISTS (SELECT 1 FROM ProcessedEvents WHERE EventId = @eventId) THEN SKIP</code>.</li>
+<li><strong>Database-level:</strong> Optimistic concurrency with <code>RowVersion</code>/<code>ETag</code> on aggregate roots. Duplicate processing fails the concurrency check.</li>
+<li><strong>Consumer-level:</strong> Azure Service Bus <code>PeekLock</code> mode. Message locked during processing; <code>Complete()</code> on success; message returns to queue after lock timeout on failure.</li>
+<li><strong>Natural idempotency:</strong> Design operations to be naturally idempotent. <code>SET status = 'confirmed'</code> is idempotent. Avoid <code>INCREMENT counter</code> or use compensating logic.</li>
+</ul>
+<h3 id="44-retry-and-dead-letter-handling">4.4 Retry and Dead-Letter Handling</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    Publish["Service Publishes Event"] --> SB["Azure Service Bus<br/>Topic/Queue<br/>(MaxDelivery: 5, TTL: 24h)"]
+    SB --> Consumer["Consumer (Subscriber)<br/>Polly Retry: 3 retries<br/>Exp Backoff 2s → 4s → 8s"]
+    Consumer -->|Success| Complete["Complete()"]
+    Consumer -->|Failure| Abandon["Abandon() → Redelivery"]
+    Abandon -->|"MaxDeliveryCount<br/>NOT exceeded"| SB
+    Abandon -->|"MaxDeliveryCount<br/>exceeded"| DLQ["Dead-Letter Queue"]
+    DLQ --> Processor["DLQ Processor (Azure Function)<br/>Log | Classify | Retry or Park"]
+    Processor --> Alert["Alert via Azure Monitor + PagerDuty"]
+</div></code></pre>
+<ul>
+<li><strong>Transient errors</strong> (network timeout, 503): Exponential backoff with jitter — 2s, 4s, 8s, max 3 retries.</li>
+<li><strong>Non-transient errors</strong> (400, deserialization failure): No retry → DLQ immediately.</li>
+<li><strong>Circuit breaker</strong>: After 5 consecutive failures in 30s, open circuit for 60s.</li>
+<li><strong>DLQ monitoring</strong>: Azure Function polls DLQ every 5 min → classifies errors → alerts engineer → auto-fix or park.</li>
+</ul>
+<h3 id="45-message-ordering-considerations">4.5 Message Ordering Considerations</h3>
+<ul>
+<li><strong>Within a single entity:</strong> Use Azure Service Bus Sessions with <code>SessionId = entityId</code>. FIFO guaranteed per session.</li>
+<li><strong>Across entities:</strong> Not guaranteed and not required. Design consumers to handle out-of-order cross-entity messages.</li>
+<li><strong>Stale event detection:</strong> Each event includes a <code>timestamp</code>. Consumers compare against last-processed timestamp for that entity; older events are discarded.</li>
+</ul>
+<h3 id="46-observability-across-async-flows">4.6 Observability Across Async Flows</h3>
+<ul>
+<li><strong>Distributed tracing:</strong> Every event carries a <code>correlationId</code> set at the API gateway. W3C Trace Context (<code>traceparent</code>) maps to Service Bus <code>CorrelationId</code>.</li>
+<li><strong>End-to-end view:</strong> Application Insights Application Map shows the full flow across sync and async hops.</li>
+<li><strong>Structured logging:</strong> Serilog → Application Insights. Every log includes <code>correlationId</code>, <code>eventId</code>, <code>serviceId</code>. Query: <code>traces | where customDimensions.correlationId == &quot;uuid&quot;</code>.</li>
+<li><strong>Message lag monitoring:</strong> Azure Monitor metrics — <code>ActiveMessageCount</code>, <code>DeadLetteredMessageCount</code>. Alert on thresholds.</li>
+<li><strong>Custom dashboards:</strong> Azure Monitor Workbooks — processing latency (p50/p95/p99), throughput per topic, DLQ depth.</li>
+</ul>
+<hr>
+<h2 id="5-risk--failure-modeling">5. Risk &amp; Failure Modeling</h2>
+<h3 id="failure-scenario-1-shared-database-bottleneck-during-migration">Failure Scenario 1: Shared Database Bottleneck During Migration</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>During transition (Phases 1–3), both the monolith and new microservices access the legacy SQL Server. Increased connections, competing locks, and CDC overhead cause query timeouts for ~40,000 users</td>
+</tr>
+<tr>
+<td><strong>Likelihood</strong></td>
+<td><strong>High</strong></td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td><strong>High</strong> — affects all users across all modules simultaneously</td>
+</tr>
+<tr>
+<td><strong>Mitigation</strong></td>
+<td>Azure SQL elastic pools for resource allocation; read replicas for reporting immediately; migrate Reporting first (lowest-write); connection pool limits per service; query store to identify regressed queries; single-writer-per-table rule</td>
+</tr>
+<tr>
+<td><strong>Telemetry</strong></td>
+<td>DTU/vCore utilization %, query execution time p95/p99, connection pool exhaustion count, lock wait time, deadlock events, CDC latency</td>
+</tr>
+</tbody>
+</table>
+<h3 id="failure-scenario-2-service-bus-message-loss-or-consumer-failure">Failure Scenario 2: Service Bus Message Loss or Consumer Failure</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>Critical domain events (e.g., <code>PaymentProcessed</code>) are lost due to consumer crashes before <code>Complete()</code>, or messages expire. Bookings stuck in &quot;pending&quot; despite successful payment</td>
+</tr>
+<tr>
+<td><strong>Likelihood</strong></td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td><strong>High</strong> — financial impact, user trust erosion, manual reconciliation required</td>
+</tr>
+<tr>
+<td><strong>Mitigation</strong></td>
+<td>PeekLock mode; <code>MaxDeliveryCount = 5</code>; DLQ monitoring (alert if depth &gt; 0); <strong>outbox pattern</strong> — persist events transactionally, background process publishes; compensating transactions for bookings stuck &gt; 10 min; schema versioning</td>
+</tr>
+<tr>
+<td><strong>Telemetry</strong></td>
+<td><code>DeadLetteredMessageCount</code> per topic, <code>ActiveMessageCount</code>, consumer processing latency, message age at consumption, outbox pending count, consumer error rate per event type</td>
+</tr>
+</tbody>
+</table>
+<h3 id="failure-scenario-3-cascading-failure-via-synchronous-dependencies">Failure Scenario 3: Cascading Failure via Synchronous Dependencies</h3>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant User
+    participant APIM as APIM Gateway
+    participant Travel as Travel Booking Svc
+    participant CB as Polly Circuit Breaker
+    participant Payment as Payment Svc (Legacy)
+
+    User->>APIM: POST /api/bookings
+    APIM->>Travel: Forward request
+    Travel->>CB: Call Payment Service
+
+    rect rgb(144, 238, 144)
+        Note over CB: Circuit CLOSED (healthy)
+        CB->>Payment: POST /api/payments
+        Payment-->>CB: 200 OK
+        CB-->>Travel: Payment confirmed
+        Travel-->>APIM: 201 Created
+        APIM-->>User: Booking confirmed
+    end
+
+    rect rgb(255, 200, 200)
+        Note over CB: Payment Svc degrades
+        User->>APIM: POST /api/bookings
+        APIM->>Travel: Forward request
+        Travel->>CB: Call Payment Service
+        CB->>Payment: POST /api/payments
+        Payment--xCB: Timeout (5s)
+        Note over CB: 5 failures in 30s → OPEN
+        CB-->>Travel: Circuit open exception
+        Travel-->>APIM: 503 + provisional booking
+        APIM-->>User: Booking provisional
+    end
+
+    rect rgb(255, 255, 200)
+        Note over CB: 60s later → HALF-OPEN
+        CB->>Payment: Test request
+        Payment-->>CB: 200 OK
+        Note over CB: Circuit CLOSED
+    end
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>Travel Service makes a sync call to Payment (legacy wrapper). Payment becomes slow → thread pool exhaustion → cascading 503 errors</td>
+</tr>
+<tr>
+<td><strong>Likelihood</strong></td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td><strong>High</strong> — core booking flow completely blocked</td>
+</tr>
+<tr>
+<td><strong>Mitigation</strong></td>
+<td>Polly circuit breaker (open after 5 failures/30s); 5s timeout; bulkhead isolation (separate <code>HttpClient</code> pool); async fallback via Service Bus queue; graceful degradation with &quot;provisional booking&quot;</td>
+</tr>
+<tr>
+<td><strong>Telemetry</strong></td>
+<td>Circuit breaker state changes, HTTP error rate/latency per dependency, thread pool queue length, App Service CPU/memory %, failed dependency calls in Application Insights</td>
+</tr>
+</tbody>
+</table>
+<h3 id="failure-scenario-4-data-inconsistency-between-monolith-and-microservices">Failure Scenario 4: Data Inconsistency Between Monolith and Microservices</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>CDC lag or replication failure causes different data between legacy and new databases. Users see different booking statuses depending on which path serves them</td>
+</tr>
+<tr>
+<td><strong>Likelihood</strong></td>
+<td><strong>High</strong> — CDC has inherent latency; intermittent inconsistency is near-certain</td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td><strong>Medium</strong> — typically temporary, but visible inconsistencies erode trust; financial reporting discrepancies trigger audit concerns</td>
+</tr>
+<tr>
+<td><strong>Mitigation</strong></td>
+<td>Single-writer rule per table; CDC lag alert if &gt; 30s; nightly reconciliation job (count + checksum comparison); feature flags for atomic read cutover (rollback &lt; 1 min); <code>LastModified</code> version stamps on all entities</td>
+</tr>
+<tr>
+<td><strong>Telemetry</strong></td>
+<td>CDC replication lag, record count delta between databases, feature flag state changes, reconciliation job pass/fail rate, user-reported discrepancy incidents</td>
+</tr>
+</tbody>
+</table>
+<h3 id="failure-scenario-5-deployment-regression-under-production-load">Failure Scenario 5: Deployment Regression Under Production Load</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Description</strong></td>
+<td>A deployment introduces a regression (breaking API change, unhandled exception). With 5 engineers and 9 months, test gaps exist. Regression passes staging but fails under production load</td>
+</tr>
+<tr>
+<td><strong>Likelihood</strong></td>
+<td><strong>Medium</strong></td>
+</tr>
+<tr>
+<td><strong>Impact</strong></td>
+<td><strong>High</strong> — core booking flow blocked; revenue impact per minute of outage across time zones</td>
+</tr>
+<tr>
+<td><strong>Mitigation</strong></td>
+<td>Blue/green via App Service slots (auto-swap back on error spike &lt; 2 min); canary releases (5% traffic for 15 min); contract testing (Pact) in CI; feature flags; Azure Monitor alert on 5xx &gt; 1% triggers automatic rollback</td>
+</tr>
+<tr>
+<td><strong>Telemetry</strong></td>
+<td>5xx error rate per service (real-time), deployment slot swap events, request latency p99 before/after, failed health checks, Application Insights Live Metrics during deployment, smoke test results in pipeline</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="6-technical-leadership-decisions">6. Technical Leadership Decisions</h2>
+<h3 id="61-what-engineering-standards-would-you-introduce-first">6.1 What engineering standards would you introduce first?</h3>
+<ol>
+<li><strong>API Design Standard.</strong> OpenAPI 3.0 specification-first. Consistent naming (kebab-case URLs, camelCase JSON). Standard error envelope: <code>{ &quot;error&quot;: { &quot;code&quot;, &quot;message&quot;, &quot;traceId&quot; } }</code>.</li>
+<li><strong>Logging &amp; Observability Standard.</strong> Structured logging via Serilog with mandatory fields: <code>correlationId</code>, <code>serviceId</code>, <code>userId</code>, <code>timestamp</code>. All logs → Application Insights.</li>
+<li><strong>Coding Standards.</strong> <code>.editorconfig</code> enforced in CI. Analyzers (SonarAnalyzer, StyleCop) with zero new warnings. Standard Clean Architecture per service (API → Application → Domain → Infrastructure).</li>
+<li><strong>Git Workflow.</strong> Trunk-based development with short-lived feature branches. Squash merges. Conventional commits. Branch protection: PR review + passing CI required.</li>
+<li><strong>Testing Baseline.</strong> Minimum 80% unit test coverage on domain/application layers (enforced in CI). Integration tests for every endpoint. Contract tests for inter-service communication.</li>
+</ol>
+<h3 id="62-what-would-you-enforce-in-code-reviews">6.2 What would you enforce in code reviews?</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bounded context integrity</strong></td>
+<td>No direct DB access across service boundaries. No shared domain models. Events only for cross-boundary communication</td>
+</tr>
+<tr>
+<td><strong>Error handling</strong></td>
+<td>No swallowed exceptions. All external calls wrapped in Polly retry/circuit breaker. Meaningful error messages with correlation IDs</td>
+</tr>
+<tr>
+<td><strong>Idempotency</strong></td>
+<td>Every event handler must be idempotent. Every POST/PUT must handle duplicate submissions</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>No secrets in code (Key Vault only). Input validation on all endpoints. SQL parameterization</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>No N+1 queries. Pagination on all list endpoints. Correct async/await (no <code>.Result</code> or <code>.Wait()</code>)</td>
+</tr>
+<tr>
+<td><strong>Observability</strong></td>
+<td>CorrelationId propagation present. Meaningful logs. Custom metrics for critical operations</td>
+</tr>
+<tr>
+<td><strong>Test quality</strong></td>
+<td>Tests assert behavior not implementation. No test interdependencies. Mocks only at boundaries</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-how-would-you-prevent-creation-of-a-distributed-monolith">6.3 How would you prevent creation of a distributed monolith?</h3>
+<ol>
+<li><strong>Async by default.</strong> Synchronous inter-service calls require explicit architectural review. &quot;Can this be an event?&quot; must be answered &quot;no&quot; with justification.</li>
+<li><strong>Independent deployability test.</strong> Every sprint, verify each service deploys independently. Coordinated deploys = coupling smell → refactor.</li>
+<li><strong>No shared databases.</strong> Enforced from Phase 2. Cross-service data via events or APIs only. Migrations per-service; cannot reference another service's tables.</li>
+<li><strong>No shared domain libraries.</strong> Common libraries limited to infrastructure (logging, health checks, event envelope contracts). Business models never shared.</li>
+<li><strong>Consumer-Driven Contract Tests.</strong> Pact in CI prevents breaking API changes. Contracts verified independently.</li>
+<li><strong>Architecture fitness functions.</strong> Automated CI checks for cross-service imports, dependency graph generation, API call graph monitoring.</li>
+</ol>
+<h3 id="64-what-architectural-shortcuts-are-you-intentionally-accepting">6.4 What architectural shortcuts are you intentionally accepting?</h3>
+<table>
+<thead>
+<tr>
+<th>Shortcut</th>
+<th>Rationale</th>
+<th>Future Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Payment wrapper, not true microservice</strong></td>
+<td>Constraint: cannot change in Phase 1. Wrapping preserves zero-downtime while isolating behind clean API</td>
+<td>Phase 2: Full rewrite with modern gateway, PCI-DSS compliant</td>
+</tr>
+<tr>
+<td><strong>App Service instead of AKS</strong></td>
+<td>5 engineers, 9 months — AKS is unnecessary ops overhead. App Service provides slots, auto-scale, managed TLS</td>
+<td>Migrate to AKS if service count &gt; 10 or service mesh needed</td>
+</tr>
+<tr>
+<td><strong>Sync REST for Travel → Payment</strong></td>
+<td>Booking confirmation is inherently request/reply. Full saga adds risk in Phase 1</td>
+<td>Implement saga pattern (Durable Functions) post-Phase 1</td>
+</tr>
+<tr>
+<td><strong>CDC-based sync, not event sourcing</strong></td>
+<td>Event sourcing every aggregate from Day 1 is too ambitious for the timeline. CDC is pragmatic and proven</td>
+<td>New services adopt event sourcing for own aggregates post-Phase 1</td>
+</tr>
+<tr>
+<td><strong>Monolithic React SPA</strong></td>
+<td>Single SPA with shared design system is sufficient. Micro-frontends add complexity</td>
+<td>Decompose into Module Federation if teams grow</td>
+</tr>
+<tr>
+<td><strong>Manual DLQ remediation initially</strong></td>
+<td>Automated DLQ processing is complex. Phase 1: alert + manual investigation</td>
+<td>Build DLQ processor Azure Function incrementally</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="ai-usage-declaration">AI Usage Declaration</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AI tools used</strong></td>
+<td>GitHub Copilot for analysis, structuring, and drafting</td>
+</tr>
+<tr>
+<td><strong>Sections AI-assisted</strong></td>
+<td>All sections were drafted with AI assistance for structuring, formatting, and articulating technical patterns. Architectural decisions, technology choices, risk assessments, and phasing strategy reflect real-world Azure microservices modernization experience provided as input judgment</td>
+</tr>
+<tr>
+<td><strong>What I manually validated</strong></td>
+<td>Azure service capabilities (App Service deployment slots, Service Bus sessions, CDC support); DDD bounded context decomposition rationale; Strangler Fig pattern applicability; Polly patterns; team sizing realism (5 engineers × 9 months); phase sequencing (lowest-risk first)</td>
+</tr>
+<tr>
+<td><strong>How to prevent blind AI usage in a backend team</strong></td>
+<td>1) <strong>Code review is mandatory</strong> — AI-generated code passes the same review bar as human code. 2) <strong>&quot;Explain your design&quot; culture</strong> — engineers articulate <em>why</em> in PRs and design reviews. 3) <strong>Test-first enforcement</strong> — AI-generated code without tests is rejected. 4) <strong>ADRs</strong> — every significant decision documented with context, options, rationale. 5) <strong>Pair programming rotations</strong> — builds the judgment AI cannot replace. 6) <strong>Security scanning in CI</strong> — OWASP, dependency audit on all code regardless of origin</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

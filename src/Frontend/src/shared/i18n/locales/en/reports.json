@@ -1,0 +1,11 @@
+{
+  "dashboard": "Dashboard",
+  "totalBookings": "Total Bookings",
+  "totalEvents": "Total Events",
+  "totalRevenue": "Total Revenue",
+  "recentBookings": "Recent Bookings",
+  "upcomingEvents": "Upcoming Events",
+  "bookingReports": "Booking Reports",
+  "revenueReport": "Revenue Report",
+  "dateRange": "Date Range"
+}
