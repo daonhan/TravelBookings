@@ -210,6 +210,23 @@ services:
     networks:
       - travelbookings-net
 
+  # ==============================================================
+  # Frontend (React SPA)
+  # ==============================================================
+
+  frontend:
+    build:
+      context: .
+      dockerfile: src/Frontend/Dockerfile
+      target: prod
+    container_name: frontend
+    ports:
+      - "${FRONTEND_HOST_PORT:-80}:80"
+    depends_on:
+      - gateway-api
+    networks:
+      - travelbookings-net
+
 volumes:
   sql-travelbooking-data:
   sql-eventmanagement-data:

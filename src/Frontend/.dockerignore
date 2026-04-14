@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.env.local
+.env.*.local
+*.md
+.vscode
+.eslintcache
+coverage
+TestResults
+e2e
+playwright-report
