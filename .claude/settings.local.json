@@ -30,7 +30,9 @@
       "Read(//d/Researches/TravelBookings/ResearchesTravelBookings/src/Services/$service/**)",
       "Bash(xargs -I {} basename {})",
       "Bash(for lib:*)",
-      "Read(//d/Researches/TravelBookings/ResearchesTravelBookings/src/Common/**)"
+      "Read(//d/Researches/TravelBookings/ResearchesTravelBookings/src/Common/**)",
+      "Bash(for svc:*)",
+      "Read(//d/Researches/TravelBookings/src/Services/$svc/$svc.API/**)"
     ]
   }
 }
