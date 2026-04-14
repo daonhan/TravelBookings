@@ -1,5 +1,8 @@
 services:
-  # ---- SQL Server for TravelBooking ----
+  # ==============================================================
+  # SQL Server Databases (one per microservice)
+  # ==============================================================
+
   sql-travelbooking:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-travelbooking
@@ -19,7 +22,86 @@ services:
       retries: 10
       start_period: 30s
 
-  # ---- TravelBooking API ----
+  sql-eventmanagement:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-eventmanagement
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - "${SQL_EVENTMANAGEMENT_HOST_PORT:-1434}:1433"
+    volumes:
+      - sql-eventmanagement-data:/var/opt/mssql
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /opt/mssql-tools*/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  sql-payment:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-payment
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - "${SQL_PAYMENT_HOST_PORT:-1435}:1433"
+    volumes:
+      - sql-payment-data:/var/opt/mssql
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /opt/mssql-tools*/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  sql-notification:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-notification
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - "${SQL_NOTIFICATION_HOST_PORT:-1436}:1433"
+    volumes:
+      - sql-notification-data:/var/opt/mssql
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /opt/mssql-tools*/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  sql-reporting:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-reporting
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - "${SQL_REPORTING_HOST_PORT:-1437}:1433"
+    volumes:
+      - sql-reporting-data:/var/opt/mssql
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /opt/mssql-tools*/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ==============================================================
+  # Microservices
+  # ==============================================================
+
   travelbooking-api:
     build:
       context: .
@@ -37,8 +119,103 @@ services:
     networks:
       - travelbookings-net
 
+  eventmanagement-api:
+    build:
+      context: .
+      dockerfile: src/Services/EventManagement/Dockerfile
+      target: prod
+    container_name: eventmanagement-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: "Server=sql-eventmanagement;Database=TravelBookings_EventManagement;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+    ports:
+      - "${EVENTMANAGEMENT_HOST_PORT:-5002}:8080"
+    depends_on:
+      sql-eventmanagement:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+
+  payment-api:
+    build:
+      context: .
+      dockerfile: src/Services/Payment/Dockerfile
+      target: prod
+    container_name: payment-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: "Server=sql-payment;Database=TravelBookings_Payment;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+    ports:
+      - "${PAYMENT_HOST_PORT:-5003}:8080"
+    depends_on:
+      sql-payment:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+
+  notification-api:
+    build:
+      context: .
+      dockerfile: src/Services/Notification/Dockerfile
+      target: prod
+    container_name: notification-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: "Server=sql-notification;Database=TravelBookings_Notification;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+    ports:
+      - "${NOTIFICATION_HOST_PORT:-5004}:8080"
+    depends_on:
+      sql-notification:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+
+  reporting-api:
+    build:
+      context: .
+      dockerfile: src/Services/Reporting/Dockerfile
+      target: prod
+    container_name: reporting-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: "Server=sql-reporting;Database=TravelBookings_Reporting;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+    ports:
+      - "${REPORTING_HOST_PORT:-5005}:8080"
+    depends_on:
+      sql-reporting:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+
+  # ==============================================================
+  # YARP API Gateway
+  # ==============================================================
+
+  gateway-api:
+    build:
+      context: .
+      dockerfile: src/Gateway/Dockerfile
+      target: prod
+    container_name: gateway-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+    ports:
+      - "${GATEWAY_HOST_PORT:-8080}:8080"
+    depends_on:
+      - travelbooking-api
+      - eventmanagement-api
+      - payment-api
+      - notification-api
+      - reporting-api
+    networks:
+      - travelbookings-net
+
 volumes:
   sql-travelbooking-data:
+  sql-eventmanagement-data:
+  sql-payment-data:
+  sql-notification-data:
+  sql-reporting-data:
 
 networks:
   travelbookings-net:

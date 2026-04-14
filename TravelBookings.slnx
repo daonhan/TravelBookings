@@ -35,6 +35,9 @@
     <Project Path="src/Services/Reporting/Reporting.Infrastructure/Reporting.Infrastructure.csproj" />
     <Project Path="src/Services/Reporting/Reporting.Tests/Reporting.Tests.csproj" />
   </Folder>
+  <Folder Name="/src/Gateway/">
+    <Project Path="src/Gateway/Gateway.API/Gateway.API.csproj" />
+  </Folder>
   <Folder Name="/src/Services/TravelBooking/">
     <Project Path="src/Services/TravelBooking/TravelBooking.API/TravelBooking.API.csproj" />
     <Project Path="src/Services/TravelBooking/TravelBooking.Application/TravelBooking.Application.csproj" />

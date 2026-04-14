@@ -45,6 +45,9 @@
     <PackageVersion Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />
     <PackageVersion Include="AspNetCore.HealthChecks.AzureServiceBus" Version="9.0.0" />
 
+    <!-- API Gateway -->
+    <PackageVersion Include="Yarp.ReverseProxy" Version="2.2.0" />
+
     <!-- Swagger -->
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.3.1" />
 
