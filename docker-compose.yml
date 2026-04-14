@@ -6,6 +6,7 @@ services:
   sql-travelbooking:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-travelbooking
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
@@ -25,6 +26,7 @@ services:
   sql-eventmanagement:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-eventmanagement
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
@@ -44,6 +46,7 @@ services:
   sql-payment:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-payment
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
@@ -63,6 +66,7 @@ services:
   sql-notification:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-notification
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
@@ -82,6 +86,7 @@ services:
   sql-reporting:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-reporting
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
@@ -105,6 +110,7 @@ services:
   sql-servicebus:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sql-servicebus
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
@@ -122,6 +128,7 @@ services:
   servicebus-emulator:
     image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
     container_name: servicebus-emulator
+    profiles: [infra, backend, frontend, full]
     environment:
       ACCEPT_EULA: "Y"
       SQL_SERVER: sql-servicebus
@@ -152,6 +159,7 @@ services:
       dockerfile: src/Services/TravelBooking/Dockerfile
       target: prod
     container_name: travelbooking-api
+    profiles: [backend, full]
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-travelbooking;Database=TravelBookings_TravelBooking;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
@@ -172,6 +180,7 @@ services:
       dockerfile: src/Services/EventManagement/Dockerfile
       target: prod
     container_name: eventmanagement-api
+    profiles: [backend, full]
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-eventmanagement;Database=TravelBookings_EventManagement;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
@@ -192,6 +201,7 @@ services:
       dockerfile: src/Services/Payment/Dockerfile
       target: prod
     container_name: payment-api
+    profiles: [backend, full]
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-payment;Database=TravelBookings_Payment;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
@@ -212,6 +222,7 @@ services:
       dockerfile: src/Services/Notification/Dockerfile
       target: prod
     container_name: notification-api
+    profiles: [backend, full]
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-notification;Database=TravelBookings_Notification;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
@@ -232,6 +243,7 @@ services:
       dockerfile: src/Services/Reporting/Dockerfile
       target: prod
     container_name: reporting-api
+    profiles: [backend, full]
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-reporting;Database=TravelBookings_Reporting;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
@@ -256,16 +268,11 @@ services:
       dockerfile: src/Gateway/Dockerfile
       target: prod
     container_name: gateway-api
+    profiles: [backend, frontend, full]
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
     ports:
       - "${GATEWAY_HOST_PORT:-8080}:8080"
-    depends_on:
-      - travelbooking-api
-      - eventmanagement-api
-      - payment-api
-      - notification-api
-      - reporting-api
     networks:
       - travelbookings-net
 
@@ -279,6 +286,7 @@ services:
       dockerfile: src/Frontend/Dockerfile
       target: prod
     container_name: frontend
+    profiles: [frontend, full]
     ports:
       - "${FRONTEND_HOST_PORT:-80}:80"
     depends_on:

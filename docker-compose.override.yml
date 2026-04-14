@@ -1,0 +1,117 @@
+# Development overrides — automatically applied by `docker compose up`.
+# For production-like mode, use: docker compose -f docker-compose.yml up
+#
+# This file switches all services to their dev targets:
+#   - Backend: dotnet watch with source volume mounts for hot-reload
+#   - Frontend: Vite dev server with HMR on port 5173
+#   - Debug ports exposed for remote debugger attachment
+
+services:
+  # ==============================================================
+  # Backend Microservices (dev mode with dotnet watch)
+  # ==============================================================
+
+  travelbooking-api:
+    build:
+      target: dev
+    volumes:
+      - .:/src
+      - nuget-cache:/root/.nuget/packages
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: "1"
+    ports:
+      - "${TRAVELBOOKING_DEBUG_PORT:-5101}:4026"
+    security_opt:
+      - "seccomp=unconfined"
+
+  eventmanagement-api:
+    build:
+      target: dev
+    volumes:
+      - .:/src
+      - nuget-cache:/root/.nuget/packages
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: "1"
+    ports:
+      - "${EVENTMANAGEMENT_DEBUG_PORT:-5102}:4026"
+    security_opt:
+      - "seccomp=unconfined"
+
+  payment-api:
+    build:
+      target: dev
+    volumes:
+      - .:/src
+      - nuget-cache:/root/.nuget/packages
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: "1"
+    ports:
+      - "${PAYMENT_DEBUG_PORT:-5103}:4026"
+    security_opt:
+      - "seccomp=unconfined"
+
+  notification-api:
+    build:
+      target: dev
+    volumes:
+      - .:/src
+      - nuget-cache:/root/.nuget/packages
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: "1"
+    ports:
+      - "${NOTIFICATION_DEBUG_PORT:-5104}:4026"
+    security_opt:
+      - "seccomp=unconfined"
+
+  reporting-api:
+    build:
+      target: dev
+    volumes:
+      - .:/src
+      - nuget-cache:/root/.nuget/packages
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: "1"
+    ports:
+      - "${REPORTING_DEBUG_PORT:-5105}:4026"
+    security_opt:
+      - "seccomp=unconfined"
+
+  # ==============================================================
+  # YARP API Gateway (dev mode with dotnet watch)
+  # ==============================================================
+
+  gateway-api:
+    build:
+      target: dev
+    volumes:
+      - .:/src
+      - nuget-cache:/root/.nuget/packages
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER: "1"
+    ports:
+      - "${GATEWAY_DEBUG_PORT:-5106}:4026"
+    security_opt:
+      - "seccomp=unconfined"
+
+  # ==============================================================
+  # Frontend (dev mode with Vite HMR)
+  # ==============================================================
+
+  frontend:
+    build:
+      target: dev
+    ports:
+      - "${FRONTEND_DEV_HOST_PORT:-5173}:5173"
+    volumes:
+      - ./src/Frontend:/app
+      - frontend-node-modules:/app/node_modules
+
+volumes:
+  nuget-cache:
+  frontend-node-modules:
