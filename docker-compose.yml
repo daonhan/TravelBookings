@@ -99,6 +99,50 @@ services:
       start_period: 30s
 
   # ==============================================================
+  # Azure Service Bus Emulator
+  # ==============================================================
+
+  sql-servicebus:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-servicebus
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    volumes:
+      - sql-servicebus-data:/var/opt/mssql
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /opt/mssql-tools*/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  servicebus-emulator:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    container_name: servicebus-emulator
+    environment:
+      ACCEPT_EULA: "Y"
+      SQL_SERVER: sql-servicebus
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    volumes:
+      - ./servicebus-emulator/Config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
+    ports:
+      - "${SERVICEBUS_HOST_PORT:-5672}:5672"
+    depends_on:
+      sql-servicebus:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /bin/sh -c "curl -f http://localhost:5672 || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 60s
+
+  # ==============================================================
   # Microservices
   # ==============================================================
 
@@ -111,10 +155,13 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-travelbooking;Database=TravelBookings_TravelBooking;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+      ConnectionStrings__ServiceBus: "Endpoint=sb://servicebus-emulator;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true"
     ports:
       - "${TRAVELBOOKING_HOST_PORT:-5001}:8080"
     depends_on:
       sql-travelbooking:
+        condition: service_healthy
+      servicebus-emulator:
         condition: service_healthy
     networks:
       - travelbookings-net
@@ -128,10 +175,13 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-eventmanagement;Database=TravelBookings_EventManagement;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+      ConnectionStrings__ServiceBus: "Endpoint=sb://servicebus-emulator;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true"
     ports:
       - "${EVENTMANAGEMENT_HOST_PORT:-5002}:8080"
     depends_on:
       sql-eventmanagement:
+        condition: service_healthy
+      servicebus-emulator:
         condition: service_healthy
     networks:
       - travelbookings-net
@@ -145,10 +195,13 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-payment;Database=TravelBookings_Payment;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+      ConnectionStrings__ServiceBus: "Endpoint=sb://servicebus-emulator;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true"
     ports:
       - "${PAYMENT_HOST_PORT:-5003}:8080"
     depends_on:
       sql-payment:
+        condition: service_healthy
+      servicebus-emulator:
         condition: service_healthy
     networks:
       - travelbookings-net
@@ -162,10 +215,13 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-notification;Database=TravelBookings_Notification;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+      ConnectionStrings__ServiceBus: "Endpoint=sb://servicebus-emulator;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true"
     ports:
       - "${NOTIFICATION_HOST_PORT:-5004}:8080"
     depends_on:
       sql-notification:
+        condition: service_healthy
+      servicebus-emulator:
         condition: service_healthy
     networks:
       - travelbookings-net
@@ -179,10 +235,13 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Docker
       ConnectionStrings__DefaultConnection: "Server=sql-reporting;Database=TravelBookings_Reporting;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+      ConnectionStrings__ServiceBus: "Endpoint=sb://servicebus-emulator;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true"
     ports:
       - "${REPORTING_HOST_PORT:-5005}:8080"
     depends_on:
       sql-reporting:
+        condition: service_healthy
+      servicebus-emulator:
         condition: service_healthy
     networks:
       - travelbookings-net
@@ -233,6 +292,7 @@ volumes:
   sql-payment-data:
   sql-notification-data:
   sql-reporting-data:
+  sql-servicebus-data:
 
 networks:
   travelbookings-net:

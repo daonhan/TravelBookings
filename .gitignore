@@ -68,3 +68,4 @@ PublishScripts/
 # Secrets
 appsettings.Development.json
 !**/appsettings.Development.template.json
+.claude/settings.local.json
