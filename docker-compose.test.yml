@@ -1,0 +1,103 @@
+# Docker Compose file for running tests against the Docker stack.
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.test.yml --profile test up --build --abort-on-container-exit --exit-code-from test-runner
+#
+# This extends the base docker-compose.yml to add:
+# 1. A test-runner container that executes integration tests
+# 2. Overrides to ensure all services are in the "test" profile
+
+services:
+  # Pull all infrastructure and services into the test profile
+  sql-travelbooking:
+    profiles: [infra, backend, frontend, full, test]
+
+  sql-eventmanagement:
+    profiles: [infra, backend, frontend, full, test]
+
+  sql-payment:
+    profiles: [infra, backend, frontend, full, test]
+
+  sql-notification:
+    profiles: [infra, backend, frontend, full, test]
+
+  sql-reporting:
+    profiles: [infra, backend, frontend, full, test]
+
+  sql-servicebus:
+    profiles: [infra, backend, frontend, full, test]
+
+  servicebus-emulator:
+    profiles: [infra, backend, frontend, full, test]
+
+  travelbooking-api:
+    profiles: [backend, full, test]
+
+  eventmanagement-api:
+    profiles: [backend, full, test]
+
+  payment-api:
+    profiles: [backend, full, test]
+
+  notification-api:
+    profiles: [backend, full, test]
+
+  reporting-api:
+    profiles: [backend, full, test]
+
+  gateway-api:
+    profiles: [backend, frontend, full, test]
+
+  frontend:
+    profiles: [frontend, full, test]
+
+  # ==============================================================
+  # Integration Test Runner
+  # ==============================================================
+
+  test-runner:
+    build:
+      context: .
+      dockerfile: tests/Docker.IntegrationTests/Dockerfile
+    container_name: test-runner
+    profiles: [test]
+    environment:
+      GATEWAY_BASE_URL: "http://gateway-api:8080"
+      TRAVELBOOKING_URL: "http://travelbooking-api:8080"
+      EVENTMANAGEMENT_URL: "http://eventmanagement-api:8080"
+      PAYMENT_URL: "http://payment-api:8080"
+      NOTIFICATION_URL: "http://notification-api:8080"
+      REPORTING_URL: "http://reporting-api:8080"
+      SA_PASSWORD: ${SA_PASSWORD}
+      SQL_TRAVELBOOKING_HOST: "sql-travelbooking"
+      SQL_EVENTMANAGEMENT_HOST: "sql-eventmanagement"
+      SQL_PAYMENT_HOST: "sql-payment"
+      SQL_NOTIFICATION_HOST: "sql-notification"
+      SQL_REPORTING_HOST: "sql-reporting"
+      SQL_TRAVELBOOKING_HOST_PORT: "1433"
+      SQL_EVENTMANAGEMENT_HOST_PORT: "1433"
+      SQL_PAYMENT_HOST_PORT: "1433"
+      SQL_NOTIFICATION_HOST_PORT: "1433"
+      SQL_REPORTING_HOST_PORT: "1433"
+      SERVICEBUS_URL: "http://servicebus-emulator:5672"
+    volumes:
+      - test-results:/app/TestResults
+    depends_on:
+      travelbooking-api:
+        condition: service_healthy
+      eventmanagement-api:
+        condition: service_healthy
+      payment-api:
+        condition: service_healthy
+      notification-api:
+        condition: service_healthy
+      reporting-api:
+        condition: service_healthy
+      gateway-api:
+        condition: service_healthy
+      frontend:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+
+volumes:
+  test-results:

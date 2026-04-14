@@ -16,3 +16,6 @@
 **/TestResults
 **/.editorconfig
 **/skills-lock.json
+**/scripts
+**/test-results
+**/playwright-report

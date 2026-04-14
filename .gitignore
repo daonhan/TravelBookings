@@ -30,7 +30,9 @@ packages/
 [Rr]eleases/
 build/
 TestResults/
+test-results/
 coverage/
+playwright-report/
 
 # IDE
 .idea/
