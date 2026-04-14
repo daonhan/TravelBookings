@@ -2,9 +2,11 @@ using TravelBookings.Common.HealthChecks;
 using TravelBookings.Common.Logging;
 using TravelBookings.Common.Security;
 using Serilog;
+using Microsoft.EntityFrameworkCore;
 using TravelBooking.API.Middleware;
 using TravelBooking.Application;
 using TravelBooking.Infrastructure;
+using TravelBooking.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+// Auto-run EF Core migrations in Docker environment
+if (app.Environment.IsEnvironment("Docker"))
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<BookingDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 // Middleware pipeline
 app.UseCorrelationId();

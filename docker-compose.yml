@@ -1,0 +1,45 @@
+services:
+  # ---- SQL Server for TravelBooking ----
+  sql-travelbooking:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-travelbooking
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
+    ports:
+      - "${SQL_TRAVELBOOKING_HOST_PORT:-1433}:1433"
+    volumes:
+      - sql-travelbooking-data:/var/opt/mssql
+    networks:
+      - travelbookings-net
+    healthcheck:
+      test: /opt/mssql-tools*/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1" -b -o /dev/null
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ---- TravelBooking API ----
+  travelbooking-api:
+    build:
+      context: .
+      dockerfile: src/Services/TravelBooking/Dockerfile
+      target: prod
+    container_name: travelbooking-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+      ConnectionStrings__DefaultConnection: "Server=sql-travelbooking;Database=TravelBookings_TravelBooking;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True"
+    ports:
+      - "${TRAVELBOOKING_HOST_PORT:-5001}:8080"
+    depends_on:
+      sql-travelbooking:
+        condition: service_healthy
+    networks:
+      - travelbookings-net
+
+volumes:
+  sql-travelbooking-data:
+
+networks:
+  travelbookings-net:
+    driver: bridge
