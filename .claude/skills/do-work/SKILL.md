@@ -35,6 +35,15 @@ Each test should target one thin vertical slice through the system. Do not write
 
 Run the feedback loops and fix any issues. Repeat until both pass cleanly.
 
+**For backend code**:
+
+```
+dotnet build
+dotnet test
+```
+
+**For frontend code**:
+
 ```
 pnpm run typecheck
 pnpm run test
@@ -42,4 +51,8 @@ pnpm run test
 
 ### 5. Commit
 
-Once typecheck and tests pass, commit the work.
+**For backend code**:
+Once build and tests pass, commit the work.
+
+**For frontend code**:
+  Once typecheck and tests pass, commit the work.
